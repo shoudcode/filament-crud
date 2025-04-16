@@ -8,6 +8,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use App\Models\Container;
 use Filament\Tables\Table;
+use PhpParser\Node\Stmt\Label;
 use Filament\Resources\Resource;
 use Tables\Actions\DeleteAction;
 use Filament\Forms\Components\Card;
@@ -15,7 +16,13 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ImportAction;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Exports\ContainerExporter;
+use App\Filament\Imports\ContainerImporter;
+use Filament\Actions\Exports\Models\Export;
+use Filament\Tables\Actions\ExportBulkAction;
 use App\Filament\Resources\ContainerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ContainerResource\RelationManagers;
@@ -118,8 +125,17 @@ class ContainerResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->Exporter(ContainerExporter::class),
+
                 ]),
-            ]);
+                ])
+                ->headerActions([
+                ExportAction::make()
+                    ->Exporter(ContainerExporter::class),
+                ImportAction::make()
+                ->importer(ContainerImporter::class),
+                ]);
     }
 
     public static function getRelations(): array
