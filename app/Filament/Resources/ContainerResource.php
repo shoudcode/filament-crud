@@ -7,6 +7,8 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use App\Models\Container;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use PhpParser\Node\Stmt\Label;
 use Filament\Resources\Resource;
@@ -116,7 +118,62 @@ class ContainerResource extends Resource
                     ->date('d/m/Y'),
             ])
             ->filters([
-                //
+                SelectFilter::make('kapal')
+                    ->label('Pilh Kapal')
+                    ->multiple()
+                    ->preload()
+                    ->options([
+                        Container::query()
+                        ->select('kapal')
+                        ->distinct()
+                        ->pluck('kapal','kapal')
+                        ->toArray()
+                    ]),
+                    SelectFilter::make('shipper')
+                    ->label('Pilh Shipper')
+                    ->multiple()
+                    ->preload()
+                    ->options([
+                        Container::query()
+                        ->select('shipper')
+                        ->distinct()
+                        ->pluck('shipper','shipper')
+                        ->toArray()
+                    ]),
+                    SelectFilter::make('penerima')
+                    ->label('Pilh Penerima')
+                    ->multiple()
+                    ->preload()
+                    ->options([
+                        Container::query()
+                        ->select('penerima')
+                        ->distinct()
+                        ->pluck('penerima','penerima')
+                        ->toArray()
+                    ]),
+                    SelectFilter::make('ukuran')
+                    ->label('Pilh Ukuran')
+                    ->multiple()
+                    ->preload()
+                    ->options([
+                        Container::query()
+                        ->select('ukuran')
+                        ->distinct()
+                        ->pluck('ukuran','ukuran')
+                        ->toArray()
+                    ]),
+                    SelectFilter::make('lokasi_bongkar')
+                    ->label('Pilh Lokasi Bongkar')
+                    ->multiple()
+                    ->preload()
+                    ->options([
+                        Container::query()
+                        ->select('lokasi_bongkar')
+                        ->distinct()
+                        ->pluck('lokasi_bongkar','lokasi_bongkar')
+                        ->toArray()
+                    ]),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
