@@ -55,6 +55,9 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->databaseNotifications(
+            )
+            ->plugin(
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             );
     }
 }

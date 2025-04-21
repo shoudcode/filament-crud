@@ -78,44 +78,54 @@ class ContainerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('kapal')
+                TextInputColumn::make('kapal')
                     ->label('Nama Kapal')
                     ->sortable()
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('etd')
                     ->label('ETD')
                     ->sortable()
+                    ->toggleable()
                     ->date('d/m/Y'),
                     TextColumn::make('eta')
                     ->label('ETA')
                     ->sortable()
+                    ->toggleable()
                     ->date('d/m/Y'),
-                TextColumn::make('shipper')
+                TextInputColumn::make('shipper')
                     ->label('Shipper')
                     ->sortable()
+                    ->toggleable()
                     ->searchable(),
-                TextColumn::make('penerima')
+                TextInputColumn::make('penerima')
                     ->label('Penerima')
                     ->sortable()
+                    ->toggleable()
                     ->searchable(),
-                TextColumn::make('no_container')
+                TextInputColumn::make('no_container')
                     ->label('No Container')
                     ->sortable()
+                    ->toggleable()
                     ->searchable(),
-                TextColumn::make('ukuran')
+                TextInputColumn::make('ukuran')
                     ->label('Ukuran')
+                    ->toggleable()
                     ->sortable(),
-                    TextColumn::make('lokasi_bongkar')
+                    TextInputColumn::make('lokasi_bongkar')
                     ->label('Lokasi Bongkar')
                     ->sortable()
+                    ->toggleable()
                     ->searchable(),
                 TextColumn::make('tgl_muat')
                     ->label('Tanggal Muat')
                     ->sortable()
+                    ->toggleable()
                     ->date('d/m/Y'),
                 TextColumn::make('tgl_bongkar')
                     ->label('Tanggal Bongkar')
                     ->sortable()
+                    ->toggleable()
                     ->date('d/m/Y'),
             ])
             ->filters([
